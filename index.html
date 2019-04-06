@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = "icon" href = "seal.jpg" type = "image/jpeg" sizes = "16x16"/>
+		<title>Save the Seals</title>
+	</head>
+	<body>
+		<a href = "page.html"><button style = "display: inline; float: left">Info Page</button></a>
+
+
+		<p id = "title" style = "font-size: 20px; background-image: url('Logo.png'); background-size: cover; width: 700px; height: 500px; margin: auto;";><i>The year is 2013 and Evil Villain Pollution has been keeping sea animals hostage. Help Sealy reach its sealy friends through all the trash and pollution! Use your arrow keys to move Sealy.</i></p>
+
+		<p id = "info" style = "display: none; width: 900px; text-align: center; font-size: 20px; margin-left: auto; margin-right: auto;">Click the button below for more info on how <i>you</i> can <b>SAVE THE SEALS</b></p>
+
+		<button id = "button" style = "display: block; margin-left: auto; margin-right: auto; margin-top: 10px; font-size: 20px;" onclick = "nextLevel()">Next!</button>
+
+		<canvas id = "myCanvas" style = "border: 1px solid #000000; background:#AADDFF; width: 1200px; height: 450px; display: none;"></canvas>
+
+		<script>
+
+
+			var myGamePiece;
+			var trash;
+			var trash2;
+			var trash3;
+			var trash4;
+			var endGame = true;
+			var level = 2011;
+			var canvas = document.getElementById("myCanvas");
+			var ctx = canvas.getContext("2d");
+
+
+			var myGameArea = {
+		
+			    start : function() {
+			        canvas.width = 1200;
+			        canvas.height = 450;
+			        context = canvas.getContext("2d");
+			        document.body.insertBefore(canvas, document.body.childNodes[0]);
+			        this.frameNo = 0;
+			        this.interval = setInterval(updateGameArea, 20);
+			        window.addEventListener('keydown', function (e) {
+			        	myGameArea.key = e.keyCode;
+			        })
+			        window.addEventListener("keyup", function (e) {
+			        	myGameArea.key = false;
+			        })
+			        },
+			    clear : function() {
+			        context.clearRect(0, 0, canvas.width, canvas.height);
+			    },
+			    stop : function() {
+			        clearInterval(this.interval);
+			    }
+			}
+
+
+
+			function startGame() {
+				myGameArea.start();
+
+				canvas.display = "block";
+
+				endGame = false;
+
+				if (level >= 2013) {
+					myGamePiece = new component(100, 60, "seal.jpg", 10, 120, "image");
+				};
+				if (level >= 2013) {
+					trash = new component(100, 60, "sixPack.png", 450, Math.random()*100, "image");
+					if (level == 2015) {
+						trash.x = 700;
+					};
+					if (level == 2017) {
+						trash.x = 200;
+					};
+					if (level == 2019) {
+						trash.x = 950
+					}
+				};
+				if (level >= 2015) {
+					trash2 = new component(100, 60, "sixPack.png", 400, Math.random()*100, "image");
+					if (level == 2017) {
+						trash2.x = 550;
+					}
+					if (level == 2019)
+						trash2.x = 700;
+				};
+				if (level >= 2017) {
+					trash3 = new component(100, 60, "sixPack.png", 900, Math.random()*100, "image");
+					if (level == 2019) {
+						trash.x = 450;
+					};
+				};
+				if (level >= 2019) {
+					trash4 = new component(100, 60, "sixPack.png", 200, Math.random()*100, "image");
+				};
+
+				goalLine = new component(290, 450, "iceberg2.png", 950, 20, "image");
+			}
+
+			function nextLevel() {
+				document.getElementById("title").style.display = "none";
+
+				if (endGame == true && level < 2019) {
+					level += 2;
+					document.getElementById("myCanvas").style.display = "block";
+					startGame();
+				};
+
+				if (endGame == true && level == 2019) {
+					document.getElementById("info").style.display = "block";
+					document.getElementById("button").innerHTML = "Click Here!";
+				}
+
+				if (document.getElementById("button").innerHTML == "Click Here!") {
+					window.open("page.html");
+				}
+			}
+
+
+
+			function component(width, height, color, x, y, type) {
+				this.gamearea = myGameArea;
+			    this.type = type;
+			    if (type == "image") {
+			        this.image = new Image();
+			        this.image.src = color;
+			    }
+			    this.width = width;
+			    this.height = height;
+			    this.speedX = 0;
+			    this.speedY = 0;    
+			    this.x = x;
+			    this.y = y;    
+			    this.update = function() {
+			        //ctx = myGameArea.context;
+			        if (type == "image") {
+			            ctx.drawImage(this.image, 
+			                this.x, 
+			                this.y,
+			                this.width, this.height);
+			        } else {
+			            ctx.fillStyle = color;
+			            ctx.fillRect(this.x, this.y, this.width, this.height);
+			        }
+			    }
+			    this.newPos = function() {
+			        this.x += this.speedX;
+			        this.y += this.speedY;        
+			    }
+			}
+
+			function updateGameArea() {
+				if (endGame == true && level >= 2013) {
+					ctx.clearRect(0, 0, 1200, 450);
+					ctx.font = "50px Arial";
+					ctx.fillText("Congratulations! Sealy survived to live another day!", 40, 50);
+
+					if (level == 2013) {
+						ctx.font = "20px Georgia";
+						ctx.fillText("Ocean pollution, AKA marine pollution, is the spreading of harmful substances such as oil, plastic, ", 100, 150);
+						ctx.fillText("industrial and agricultural waste and chemical particles into the ocean.", 100, 170);
+						ctx.fillText("In 1975, the National Academy of Sciences estimated that ocean-based sources, such as cargo ships and cruise liners, ", 100, 225);
+						ctx.fillText("had dumped 14 billion pounds of garbage into the ocean.", 100, 245);
+						ctx.fillText("Of the tens of millions of gallons of oil that enter North American oceans yearly due to human activities, ", 100, 300);
+						ctx.fillText("only 8% comes from tanker or oil pipeline spills.", 100, 320);
+
+						ctx.font = "30px Georgia";
+						ctx.fillText("Onto Year 2015! Onwards and Upwards!", 50, 400);
+					};
+					if (level == 2015) {
+						ctx.font = "20px Georgia";
+						ctx.fillText("The Exon oil spill has likely harmed or killed approximately 82,000 birds, 6,165 sea turtles, ", 100, 150);
+						ctx.fillText("and up to 25,900 marine mammals.", 100, 170);
+						ctx.fillText("At current rates, plastic is expected to outweigh all the fish in the sea by 2050.", 100, 225);
+						ctx.fillText("An estimated 80% of marine litter makes its way there gradually from land-based sources.", 100, 300);
+
+						ctx.font = "30px Georgia";
+						ctx.fillText("Onto Year 2017! There's still hope!", 50, 400);
+					};
+					if (level == 2017) {
+						ctx.font = "20px Georgia";
+						ctx.fillText("A total of 1.8 trillion plastic pieces were estimated to be floating in the Great Pacific Garbage Patch, ", 100, 150);
+						ctx.fillText("a plastic count that is equivalent to 250 pieces of debris for every human in the world.", 100, 170);
+						ctx.fillText("17% of the species affected by plastic are on the IUCN (International Union for Conservation of Nature) ", 100, 225);
+						ctx.fillText("Red List of Threatened Species.", 100, 245);
+						ctx.fillText("Chemicals in plastics will enter the body of the animal feeding on the plastic, and as the feeder becomes prey, ", 100, 300);
+						ctx.fillText("the chemicals will pass to the predator - making their way up the food web that includes humans.", 100, 320);
+
+						ctx.font = "30px Georgia";
+						ctx.fillText("Onto Year 2019! Please help.", 50, 400);
+					};
+					if (level == 2019) {
+						ctx.font = "20px Georgia";
+						ctx.fillText("How to help: ", 100, 125);
+						ctx.fillText("1. Reduce Your Use of Single-Use Plastics", 100, 175);
+						ctx.fillText("2. Participate In (or Organize) a Beach or River Cleanup ", 100, 250);
+						ctx.fillText("3. Spread the Word", 100, 325);
+
+						ctx.font = "30px Georgia";
+						ctx.fillText("It has not been the best, but let's work to make things better!", 50, 400);
+					};
+				} else {
+				    myGameArea.clear();
+				    myGamePiece.speedX = 0;
+				    myGamePiece.speedY = 0;
+
+
+				    //boundaries
+				    if (myGamePiece.x <= 0) {
+				    	myGamePiece.x = 1;
+					};
+					if (myGamePiece.y <= 0) {
+						myGamePiece.y = 1;
+					};
+					if (myGamePiece.y >= 410) {
+						myGamePiece.y = 409;
+					};
+
+				    //controls
+				    if (myGameArea.key && myGameArea.key == 37) {
+				    	myGamePiece.speedX = -3; 
+				    };
+				    if (myGameArea.key && myGameArea.key == 39) {
+				    	myGamePiece.speedX = 3; 
+				    };
+				    if (myGameArea.key && myGameArea.key == 38) {
+				    	myGamePiece.speedY = -3; 
+				    };
+				    if (myGameArea.key && myGameArea.key == 40) {
+				    	myGamePiece.speedY = 3; 
+				    };
+
+				    //reset trash
+				    if (trash.y >= 450) {
+				    	trash.y = Math.random()*100;
+				    } else {
+				    	trash.speedY = Math.random()*2;
+
+				    	trash.newPos();
+				    	trash.update();
+				    }
+				    if (level >= 2015) {
+				   		if (trash2.y >= 450) {
+				    		trash2.y = Math.random()*100;
+				    	} else {
+				    		trash2.speedY = Math.random()*2;
+
+				    		trash2.newPos();
+				    		trash2.update();
+				    	}
+				    };
+				    if (level >= 2017) {
+					    if (trash3.y >= 450) {
+					    	trash3.y = Math.random()*100;
+					    } else {
+					    	trash3.speedY = Math.random()*2;
+
+					    	trash3.newPos();
+					    	trash3.update();
+					    }
+					};
+					if (level >= 2019) {
+					    if (trash4.y >= 450) {
+					    	trash4.y = Math.random()*100;
+					    } else {
+					    	trash4.speedY = Math.random()*2;
+
+					    	trash4.newPos();
+					    	trash4.update();
+					    }
+					};
+
+				    //check for collison with trash
+				    if (myGamePiece.x < trash.x + trash.width && myGamePiece.x + myGamePiece.width > trash.x && myGamePiece.y < trash.y + trash.height && myGamePiece.y + myGamePiece.height > trash.y) {
+				    	myGamePiece.x = 10;
+				    };
+				    if (level >= 2015) {
+					    if (myGamePiece.x < trash2.x + trash2.width && myGamePiece.x + myGamePiece.width > trash2.x && myGamePiece.y < trash2.y + trash2.height && myGamePiece.y + myGamePiece.height > trash2.y) {
+					    	myGamePiece.x = 10;
+					    };
+					}
+					if (level >= 2017) {
+					    if (myGamePiece.x < trash3.x + trash3.width && myGamePiece.x + myGamePiece.width > trash3.x && myGamePiece.y < trash3.y + trash3.height && myGamePiece.y + myGamePiece.height > trash3.y) {
+					    	myGamePiece.x = 10;
+					    };
+					};
+					if (level >= 2019) {
+					    if (myGamePiece.x < trash4.x + trash4.width && myGamePiece.x + myGamePiece.width > trash4.x && myGamePiece.y < trash4.y + trash4.height && myGamePiece.y + myGamePiece.height > trash4.y) {
+					    	myGamePiece.x = 10;
+					    };
+					};
+
+				    //collision with goal
+				    if (myGamePiece.x < goalLine.x + goalLine.width && myGamePiece.x + myGamePiece.width > goalLine.x && myGamePiece.y < goalLine.y + goalLine.height && myGamePiece.y + myGamePiece.height > goalLine.y) {
+				    		myGamePiece.x = 10;
+				    		endGame = true;
+				    };
+
+				    //update game
+				    myGamePiece.newPos();
+				    myGamePiece.update();
+				    goalLine.update();
+				 }
+				}
+		</script>
+
+	</body>
+</html>

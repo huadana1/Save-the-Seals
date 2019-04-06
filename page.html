@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = "icon" href = "seal.jpg" type = "image/jpeg" sizes = "16x16"/>
+		<title>Save the Seals</title>
+		<style>
+			body {
+				background-color: #AADDFF;
+			}
+			h1 {
+				font-size: 50px;
+				text-align: center;
+				margin-top: auto;
+				margin-bottom: auto;
+				color: #2233FF;
+			}
+			h3 {
+				width: 500px;
+				margin-bottom: 10px;
+				margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+				font-size: 35px;
+				color: #FF6611;
+			}
+			ul, li {
+				font-size: 20px;
+				width: 500px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			p {
+				display: inline;
+			}
+			#logo {
+				width: 100px;
+				height: 75px;
+				margin-left: 5px;
+				margin-right: 5px;
+			}
+			#seal {
+				width: 100px;
+				height: 75px;
+				display: inline;
+				margin-left: 40%;
+				margin-right: auto;
+			}
+			#left {
+				float: left;
+				width: 200px;
+				height: 120px;
+				margin-left: 80px;
+			}
+			#right {
+				float: right;
+				width: 200px;
+				height: 120px;
+				margin-right: 100px;
+			}
+		</style>
+		<script>
+			function toGame() {
+				window.open("index.html");
+			}
+		</script>
+	</head>
+	<body>
+		<h1>
+			<img id = "logo" src = "Logo.png">Save the Seals<img id = "logo" src = "Logo.png">
+		</h1>
+
+		<h3>How You Can Help</h3>
+
+		<img src = "poorSeal.gif" id = "left">
+		<img src = "cuteSeal.gif" id = "right">
+
+		<ul>
+			<li>Reduce Use of Plastics</li>
+			<li>Recycle</li>
+			<li>Properly Dispose of Hazardous Materials</li>
+			<li>Participate In (or Organize) a Beach or River Cleanup</li>
+			<li>Spread the Word</li>
+		</ul>
+
+		<h3>Tips by Friends</h3>
+
+		<img src = "runSeal.gif" id = "left">
+		<img src = "loveSeals.gif" id = "right">
+
+		<ul>
+			<li><a href = "https://www.greenpeace.org/usa/oceans/" target = "blank">Green Peace</a></li>
+			<li><a href = "https://ocean.si.edu/conservation/climate-change/how-you-can-help-ocean" target = blank>Smithsonian</a></li> 
+			<li><a href = "https://www.nationalgeographic.org/grants/grant-opportunities/reducing-ocean-plastic-pollution/" target = blank>National Geographic</a></li>
+			<li><a href = "https://www.nrdc.org/stories/10-ways-reduce-plastic-pollution" target = blank>Natural Resources Defense Council</a></li>
+			<li><a href = "https://la.surfrider.org/programs/beach-cleanups/" target = blank>Beach Clean Ups </a></li>
+		</ul>
+
+		<img id = "seal" src = "seal.jpg" onclick = "toGame()">
+		<p>Click Sealy to go to the game</p>
+	</body>
+</html>
